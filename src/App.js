@@ -9,19 +9,20 @@ function App() {
   const [yesHovered, setYesHovered] = useState(false);
   const [openNoDialog, setOpenNoDialog] = useState(false);
   const [audio] = useState(new Audio(birthdaySong));
+  const [yesClicked, setYesClicked] = useState(false); // New state to handle "Yes" click
 
-  // Auto-play song at low volume
+  // Auto-play song at low volume with user interaction fallback
   useEffect(() => {
     audio.volume = 0.7;
-    audio.play().catch((e) => console.log("Autoplay blocked:", e));
+    const playAudio = () => audio.play().catch((e) => console.log("Autoplay blocked:", e));
+    document.addEventListener("click", playAudio); // Try to start the song on any user click
+    return () => document.removeEventListener("click", playAudio); // Cleanup on unmount
   }, [audio]);
 
-  // Navigate to the next paragraph
   const handleNext = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % paragraphs.length);
   };
 
-  // Navigate to the previous paragraph
   const handlePrevious = () => {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + paragraphs.length) % paragraphs.length);
   };
@@ -29,7 +30,7 @@ function App() {
   return (
     <Box
       sx={{
-        bgcolor: '#a93c49',
+        bgcolor: '#282826',
         color: '#feeec5',
         minHeight: '100vh',
         p: 2,
@@ -40,9 +41,9 @@ function App() {
         alignItems: 'center',
       }}
     >
-      {/* Heading */}
-      <Typography variant="h3" sx={{ mb: 2 }} gutterBottom>
-        Happy Birthday, Vaishnavi 🎉🎂  
+      {/* Centered Heading */}
+      <Typography variant="h3" sx={{ mb: 2, textAlign: 'center' }} gutterBottom>
+        Happy Birthday, Vaishnavi 🎂❤️  
       </Typography>
 
       {/* Paragraph Slider */}
@@ -102,14 +103,18 @@ function App() {
             <Button
               variant="contained"
               onMouseEnter={() => setYesHovered(true)}
+              onClick={() => setYesClicked(true)} // Set yesClicked to true on click
               disabled={yesHovered}
               sx={{
                 bgcolor: yesHovered ? 'gray' : '#feeec5',
-                color: '#a93c49',
+                color: yesClicked ? 'white' : '#a93c49', // Change text color to white on click
                 mr: 2,
               }}
             >
-              {yesHovered ? "Already selected" : "Yes"}
+              {/* {yesHovered ? "Bhai Seriously 😳😳..." : "Yes"} */}
+              {yesHovered ? <Typography variant="h6" gutterBottom sx={{color: '#a93c49'}}>
+                Bhai Seriously 😳😳... ?
+          </Typography>: "Yes"}
             </Button>
             <Button
               variant="contained"
