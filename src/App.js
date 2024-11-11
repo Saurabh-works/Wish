@@ -42,7 +42,7 @@ function App() {
     >
       {/* Heading */}
       <Typography variant="h3" sx={{ mb: 2 }} gutterBottom>
-        Happy Birthday, Vaishnavi 🎉🎂
+        Happy Birthday, Vaishnavi 🎉🎂  
       </Typography>
 
       {/* Paragraph Slider */}
