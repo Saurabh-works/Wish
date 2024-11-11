@@ -136,7 +136,7 @@ function App() {
         open={openNoDialog}
         onClose={() => setOpenNoDialog(false)}
       >
-        <DialogTitle>You’re truly irreplaceable. Thank you, Vaishnavi!</DialogTitle>
+        <DialogTitle>You’re truly irreplaceable, Vaishnavi. Thank you for everything ❤️🌹✨</DialogTitle>
         <Button
           onClick={() => setOpenNoDialog(false)}
           sx={{ m: 2 }}
